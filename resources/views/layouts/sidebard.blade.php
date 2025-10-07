@@ -10,9 +10,9 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link " href="">
+            <a class="nav-link " href="{{ route('medications.index') }}">
                 <i class="bi bi-grid"></i>
-                <span>Secciones</span>
+                <span>Medicamentos</span>
             </a>
         </li>
 

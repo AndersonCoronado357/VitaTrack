@@ -11,8 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('medications', function (Blueprint $table) {
+        Schema::create('Medications', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 150);
+            $table->string('dosage', 150);
+            $table->string('frequency', 150);
+            $table->string('time', 150);
+            $table->date('start_date');
+            $table->date('end_date')->nullable();
+            $table->string('administration_route', 100);
+            $table->boolean('reminder')->default(true);
+            $table->text('notes')->nullable();
+            $table->string('status', 50)->default('active');
             $table->timestamps();
         });
     }
@@ -22,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('medications');
+        Schema::dropIfExists('Medications');
     }
 };
