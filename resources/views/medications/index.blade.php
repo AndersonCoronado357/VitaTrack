@@ -21,7 +21,9 @@
                     </div>
 
                     <div class="col-md-1">
-                        <a href="{{ route('medications.create') }}" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
+                        <a href="{{ route('medications.create') }}" class="btn btn-primary">
+                            <i class="bi bi-plus-circle-fill"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -34,8 +36,38 @@
                     </div>
                 @endif
 
-                <table class="table table-bordered">
+                <form action="{{ route('medications.index') }}" class="navbar-search" method="GET">
+                    <div class="row mt-3">
+                        <div class="col-md-auto">
+                            <select name="records_per_page" class="form-select bg-light border-0 small" value="{{ $data->records_per_page }}">
+                                <option value="2" {{ $data->records_per_page == 2 ? 'selected' : '' }}>2</option>
+                                <option value="10" {{ $data->records_per_page == 10 ? 'selected' : '' }}>10</option>
+                                <option value="15" {{ $data->records_per_page == 15 ? 'selected' : '' }}>15</option>
+                                <option value="30" {{ $data->records_per_page == 30 ? 'selected' : '' }}>30</option>
+                                <option value="50" {{ $data->records_per_page == 50 ? 'selected' : '' }}>50</option>
+                            </select>
+                        </div>
 
+                        <div class="col-md-10">
+                            <div class="input-group mb-3">
+                                <input type="text"
+                                       class="form-control bg-light border-0 small"
+                                       placeholder="Buscar..."
+                                       aria-label="search"
+                                       name="filter"
+                                       value="{{ $data->filter }}" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-auto">
+                            <div class="input-group mb-3">
+                                <button class="btn btn-primary"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -61,9 +93,7 @@
                                 <td>{{ $medication->frequency }}</td>
                                 <td>{{ $medication->time }}</td>
                                 <td>{{ \Carbon\Carbon::parse($medication->start_date)->format('d/m/Y') }}</td>
-                                <td>
-                                    {{ $medication->end_date ? \Carbon\Carbon::parse($medication->end_date)->format('d/m/Y') : '-' }}
-                                </td>
+                                <td>{{ $medication->end_date ? \Carbon\Carbon::parse($medication->end_date)->format('d/m/Y') : '-' }}</td>
                                 <td>{{ ucfirst($medication->administration_route) }}</td>
                                 <td>
                                     @if((int) $medication->reminder === 1)
@@ -82,7 +112,9 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('medications.edit', $medication->id) }}" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>
+                                    <a href="{{ route('medications.edit', $medication->id) }}" class="btn btn-warning">
+                                        <i class="bi bi-pencil-fill"></i>
+                                    </a>
 
                                     <form action="{{ route('medications.delete', $medication->id) }}" style="display: contents;" method="POST">
                                         @csrf
@@ -97,11 +129,10 @@
                             </tr>
                         @endforelse
                     </tbody>
-
                 </table>
 
+                {{ $medications->appends(request()->except('page'))->links('components.customPagination') }}
             </div>
-
         </div>
     </section>
 
