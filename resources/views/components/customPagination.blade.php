@@ -16,21 +16,28 @@
             @endif
 
             {{-- Pages --}}
-            @foreach($elements as $element)
+            @foreach ($elements as $element)
 
-                @foreach ($element as $page => $url)
+                @if (is_array($element))
 
-                    @if ($page == $paginator->currentPage())
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#">{{ $page }}</a>
-                        </li>
-                    @else
-                        <li class="page-item">
-                            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
-                        </li>
-                    @endif
+                    @foreach ($element as $page => $url)
 
-                @endforeach
+                        @if ($page == $paginator->currentPage())
+                            <li class="page-item active" aria-current="page">
+                                <a class="page-link" href="#">{{ $page }}</a>
+                            </li>
+                        @else
+                            <li class="page-item">
+                                <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                            </li>
+                        @endif
+
+                    @endforeach
+
+                @else
+                    <li class="page-item disabled"><span class="page-link">{{ $element }}</span></li>
+                @endif
+
             @endforeach
 
             {{-- Next --}}

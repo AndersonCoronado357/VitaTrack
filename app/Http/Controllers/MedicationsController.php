@@ -11,41 +11,31 @@ use Illuminate\Support\Facades\Validator;
 
 class MedicationsController extends Controller
 {
-    public function index(Request $request)
-    {
-        // ✅ Control del tamaño de paginación
-        if (!empty($request->records_per_page)) {
-            $request->records_per_page = $request->records_per_page <= env('PAGINATION_MAX_SIZE')
-                ? $request->records_per_page
-                : env('PAGINATION_MAX_SIZE');
+
+    public function index(Request $request) {
+
+        if(!empty($request->records_per_page)) {
+
+            $request->records_per_page = $request->records_per_page <= env('PAGINATION_MAX_SIZE') ? $request->records_per_page : env('PAGINATION_MAX_SIZE');
+
         } else {
+
             $request->records_per_page = env('PAGINATION_DEFAULT_SIZE');
+
         }
 
-        // ✅ Búsqueda y filtrado
-        $medications = Medications::where(function ($query) use ($request) {
-            $query->where('name', 'LIKE', "%{$request->filter}%")
-                  ->orWhere('dosage', 'LIKE', "%{$request->filter}%")
-                  ->orWhere('frequency', 'LIKE', "%{$request->filter}%")
-                  ->orWhere('administration_route', 'LIKE', "%{$request->filter}%");
-        })
-        ->orderBy('id', 'desc')
-        ->paginate($request->records_per_page);
-
-        // ✅ Retorna la vista con datos y filtros
-        return view('medications/index', [
-            'medications' => $medications,
-            'data' => $request
-        ]);
+        $medications = Medications::where('name', 'LIKE', "%$request->filter%")
+                            ->paginate($request->records_per_page);
+        return view('medications/index', ['medications' => $medications, 'data' => $request]);
     }
 
-    public function create()
-    {
+    public function create() {
+
         return view('medications/create');
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
+
         Validator::make($request->all(), [
             'name' => 'required|string|max:150',
             'dosage' => 'required|string|max:150',
@@ -90,8 +80,8 @@ class MedicationsController extends Controller
         }
     }
 
-    public function edit($id)
-    {
+    public function edit($id) {
+
         $medication = Medications::find($id);
 
         if (empty($medication)) {
@@ -102,8 +92,8 @@ class MedicationsController extends Controller
         return view('medications/edit', ['medication' => $medication]);
     }
 
-    public function update(Request $request)
-    {
+    public function update(Request $request) {
+
         Validator::make($request->all(), [
             'medication_id' => 'required|exists:medications,id',
             'name' => 'required|string|max:150',
@@ -151,8 +141,8 @@ class MedicationsController extends Controller
         }
     }
 
-    public function delete($id)
-    {
+    public function delete($id) {
+
         try {
             $medication = Medications::find($id);
 
