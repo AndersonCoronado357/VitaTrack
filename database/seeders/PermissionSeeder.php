@@ -28,6 +28,18 @@ class PermissionSeeder extends Seeder
             ['name' => 'updateNotes', 'description' => 'Editar Notas', 'module' => 'Notas'],
             ['name' => 'deleteNotes', 'description' => 'Eliminar Notas', 'module' => 'Notas'],
 
+            // Users
+            ['name' => 'showUsers', 'description' => 'Ver Usuarios', 'module' => 'Usuarios'],
+            ['name' => 'createUsers', 'description' => 'Crear Usuarios', 'module' => 'Usuarios'],
+            ['name' => 'updateUsers', 'description' => 'Editar Usuarios', 'module' => 'Usuarios'],
+            ['name' => 'deleteUsers', 'description' => 'Eliminar Usuarios', 'module' => 'Usuarios'],
+
+            // Roles
+            ['name' => 'showRoles', 'description' => 'Ver Roles', 'module' => 'Roles'],
+            ['name' => 'createRoles', 'description' => 'Crear Roles', 'module' => 'Roles'],
+            ['name' => 'updateRoles', 'description' => 'Actualizar Roles', 'module' => 'Roles'],
+            ['name' => 'deleteRoles', 'description' => 'Eliminar Roles', 'module' => 'Roles'],
+
             //
             // ['name' => 'show', 'description' => 'Ver ', 'module' => ''],
             // ['name' => 'create', 'description' => 'Crear ', 'module' => ''],

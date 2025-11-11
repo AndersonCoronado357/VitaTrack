@@ -1,14 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="pagetitle">
-        <h1>Notas</h1>
+        <h1>Roles</h1>
         <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('home.index') }}">Home</a></li>
-            <li class="breadcrumb-item active">Notas</li>
-        </ol>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('home.index') }}">Home</a></li>
+                <li class="breadcrumb-item active">Roles</li>
+            </ol>
         </nav>
     </div>
 
@@ -17,21 +16,20 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-11">
-                        <h3>Notas</h3>
+                        <h3>Roles</h3>
                     </div>
 
-                    @if (\App\Helpers\RoleHelper::isAuthorized('Notas.createNotes'))
+                    @if (\App\Helpers\RoleHelper::isAuthorized('Roles.createRoles'))
                         <div class="col-md-1">
-                            <a href="{{ route('notes.create') }}" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
+                            <a href="{{ route('roles.create') }}" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
                         </div>
                     @endif
-
                 </div>
             </div>
 
             <div class="card-body">
 
-                <form action="{{ route('notes.index') }}" class="navbar-search" method="GET">
+                <form action="{{ route('roles.index') }}" class="navbar-search" method="GET">
 
                     <div class="row mt-3">
                         <div class="col-md-auto">
@@ -47,72 +45,67 @@
                         </div>
 
                         <div class="col-md-10">
-                            <div class="input-group mb-3">
+                            <div class="input-group-mb-3">
                                 <input type="text"
                                        class="form-control bg-light border-0 small"
                                        placeholder="Buscar..."
                                        aria-label="search"
                                        name="filter"
-                                       value="{{ $data->filter }}" />
+                                       value="{{ $data->filter }}">
                             </div>
                         </div>
 
                         <div class="col-md-auto">
-                            <div class="input-group mb-3">
+
+                            <div class="input-group-mb-3">
                                 <button class="btn btn-primary"><i class="bi bi-search"></i></button>
                             </div>
                         </div>
+
                     </div>
 
                 </form>
 
-                <table class="table table-bordered">
-
+                <table class="table table-bordered mt-3">
                     <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Título</th>
-                            <th>Medicamento</th>
+                            <th>Nombre</th>
                             <th></th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        @foreach ($notes as $note)
+                        @foreach ($roles as $role)
 
                             <tr>
-                                <td>{{ $note->id }}</td>
-                                <td>{{ $note->title }}</td>
-                                <td>{{ $note->medication->name }}</td>
+                                <td>{{ $role->id }}</td>
+                                <td>{{ $role->name }}</td>
                                 <td>
 
-                                    @if (\App\Helpers\RoleHelper::isAuthorized('Notas.updateNotes'))
-                                        <a href="{{ route('notes.edit', $note->id) }}" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>
+                                    @if (\App\Helpers\RoleHelper::isAuthorized('Roles.updateRoles'))
+                                        <a href="{{ route('roles.edit', $role->id) }}" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>
                                     @endif
 
-                                    @if (\App\Helpers\RoleHelper::isAuthorized('Notas.deleteNotes'))
-                                        <form action="{{ route('notes.delete', $note->id) }}" style="display: contents;" method="POST">
+
+                                    @if (\App\Helpers\RoleHelper::isAuthorized('Roles.deleteRoles'))
+                                        <form action="{{ route('roles.delete', $role->id) }}" style="display: contents;" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-danger btnDelete"><i class="bi bi-trash-fill"></i></button>
                                         </form>
                                     @endif
-
                                 </td>
                             </tr>
 
                         @endforeach
                     </tbody>
-
                 </table>
 
-                {{ $notes->appends(request()->except('page'))->links('components.customPagination') }}
-
+                {{ $roles->appends(request()->except('page'))->links('components.customPagination') }}
             </div>
-
         </div>
     </section>
-
 @endsection
 
 <script type="module">
@@ -125,7 +118,7 @@
 
             Swal.fire({
 
-                title: "¿Desea eliminar la nota?",
+                title: "¿Desea eliminar el rol?",
                 text: "No podrá revertirlo",
                 icon: 'question',
                 showCancelButton: true,
