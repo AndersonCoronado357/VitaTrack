@@ -20,25 +20,57 @@
                         <h3>Medicamentos</h3>
                     </div>
 
-                    <div class="col-md-1">
-                        <a href="{{ route('medications.create') }}" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
-                    </div>
+                    @if (\App\Helpers\RoleHelper::isAuthorized('Medicamentos.createMedications'))
+                        <div class="col-md-1">
+                            <a href="{{ route('medications.create') }}" class="btn btn-primary"><i class="bi bi-plus-circle-fill"></i></a>
+                        </div>
+                    @endif
+
                 </div>
             </div>
 
             <div class="card-body">
 
-                @if (Session::has('message'))
-                    <div id="alert-message" class="alert alert-{{ Session::get('message.type') }}">
-                        {{ Session::get('message.content') }}
+                <form action="{{ route('medications.index') }}" class="navbar-search" method="GET">
+
+                    <div class="row mt-3">
+                        <div class="col-md-auto">
+
+                            <select name="records_per_page" class="form-select bg-light border-0 small" value="{{ $data->records_per_page }}">
+                                <option value="2" {{ $data->records_per_page == 2 ? 'selected' : '' }}>2</option>
+                                <option value="10" {{ $data->records_per_page == 10 ? 'selected' : '' }}>10</option>
+                                <option value="15" {{ $data->records_per_page == 15 ? 'selected' : '' }}>15</option>
+                                <option value="30" {{ $data->records_per_page == 30 ? 'selected' : '' }}>30</option>
+                                <option value="50" {{ $data->records_per_page == 50 ? 'selected' : '' }}>50</option>
+                            </select>
+
+                        </div>
+
+                        <div class="col-md-10">
+                            <div class="input-group mb-3">
+                                <input type="text"
+                                       class="form-control bg-light border-0 small"
+                                       placeholder="Buscar..."
+                                       aria-label="search"
+                                       name="filter"
+                                       value="{{ $data->filter }}" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-auto">
+                            <div class="input-group mb-3">
+                                <button class="btn btn-primary"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
                     </div>
-                @endif
+
+                </form>
 
                 <table class="table table-bordered">
 
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>Id</th>
                             <th>Nombre</th>
                             <th>Dosis</th>
                             <th>Frecuencia</th>
@@ -53,7 +85,8 @@
                     </thead>
 
                     <tbody>
-                        @forelse ($medications as $medication)
+                        @foreach ($medications as $medication)
+
                             <tr>
                                 <td>{{ $medication->id }}</td>
                                 <td>{{ $medication->name }}</td>
@@ -82,23 +115,28 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{ route('medications.edit', $medication->id) }}" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>
 
-                                    <form action="{{ route('medications.delete', $medication->id) }}" style="display: contents;" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger btnDelete"><i class="bi bi-trash-fill"></i></button>
-                                    </form>
+                                    @if (\App\Helpers\RoleHelper::isAuthorized('Medicamentos.updateMedications'))
+                                        <a href="{{ route('medications.edit', $medication->id) }}" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>
+                                    @endif
+
+                                    @if (\App\Helpers\RoleHelper::isAuthorized('Medicamentos.deleteMedications'))
+                                        <form action="{{ route('medications.delete', $medication->id) }}" style="display: contents;" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger btnDelete"><i class="bi bi-trash-fill"></i></button>
+                                        </form>
+                                    @endif
+
                                 </td>
                             </tr>
-                        @empty
-                            <tr>
-                                <td colspan="11" class="text-center text-muted">No hay medicamentos registrados.</td>
-                            </tr>
-                        @endforelse
+
+                        @endforeach
                     </tbody>
 
                 </table>
+
+                {{ $medications->appends(request()->except('page'))->links('components.customPagination') }}
 
             </div>
 
@@ -108,30 +146,30 @@
 @endsection
 
 <script type="module">
+
     $(document).ready(function() {
 
-        setTimeout(function() {
-            $('#alert-message').fadeOut('slow');
-        }, 3000);
-
         $('.btnDelete').click(function(event) {
+
             event.preventDefault();
 
             Swal.fire({
+
                 title: "¿Desea eliminar el medicamento?",
                 text: "No podrá revertirlo",
                 icon: 'question',
                 showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Sí, eliminar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
+
+              }).then((result) => {
+
                 if (result.isConfirmed) {
+
                     const form = $(this).closest('form');
+
                     form.submit();
                 }
-            });
+              });
         });
     });
+
 </script>

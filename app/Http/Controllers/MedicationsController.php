@@ -12,11 +12,21 @@ use Illuminate\Support\Facades\Validator;
 class MedicationsController extends Controller
 {
 
-    public function index() {
+    public function index(Request $request) {
 
-        $medications = Medications::all();
+        if(!empty($request->records_per_page)) {
 
-        return view('medications/index', ['medications' => $medications]);
+            $request->records_per_page = $request->records_per_page <= env('PAGINATION_MAX_SIZE') ? $request->records_per_page : env('PAGINATION_MAX_SIZE');
+
+        } else {
+
+            $request->records_per_page = env('PAGINATION_DEFAULT_SIZE');
+
+        }
+
+        $medications = Medications::where('name', 'LIKE', "%$request->filter%")
+                            ->paginate($request->records_per_page);
+        return view('medications/index', ['medications' => $medications, 'data' => $request]);
     }
 
     public function create() {
