@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 
 class RolesController extends Controller
 {
+
     public function index(Request $request){
 
         $filter = $request->filter;
@@ -134,15 +135,12 @@ class RolesController extends Controller
             'role_id' => 'required|exists:roles,id',
             'name' => 'required|max:64',
             'permissions' => 'required|json',
-            'sections' => 'required|json',
         ],
         [
             'name.required' => 'El nombre es requerido.',
             'name.max' => 'El nombre no puede ser mayor a :max carácteres.',
             'permissions.required' => 'debe seleccionar al menos 1 permiso.',
             'permissions.json' => 'el campo permissions tiene el formato incorrecto.',
-            'sections.required' => 'debe seleccionar al menos una sección.',
-            'sections.json' => 'el campo sections tiene el formato incorrecto.',
         ])->validate();
 
         try {
