@@ -16,6 +16,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 @include('web/health-metrics.php');
 
+@include('web/sleep.php');
+
 @include('web/users.php');
 
 @include('web/test.php');

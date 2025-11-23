@@ -65,6 +65,15 @@ class PermissionSeeder extends Seeder
             ['name' => 'statsHealthMetrics', 'description' => 'Ver Estadísticas', 'module' => 'Métricas de Salud'],
             ['name' => 'rangesHealthMetrics', 'description' => 'Configurar Rangos', 'module' => 'Métricas de Salud'],
 
+            // Sleep
+            ['name' => 'showSleep', 'description' => 'Ver Sueño', 'module' => 'Sueño y Descanso'],
+            ['name' => 'createSleep', 'description' => 'Registrar Sueño', 'module' => 'Sueño y Descanso'],
+            ['name' => 'updateSleep', 'description' => 'Editar Registros', 'module' => 'Sueño y Descanso'],
+            ['name' => 'deleteSleep', 'description' => 'Eliminar Registros', 'module' => 'Sueño y Descanso'],
+            ['name' => 'historySleep', 'description' => 'Ver Historial', 'module' => 'Sueño y Descanso'],
+            ['name' => 'statsSleep', 'description' => 'Ver Estadísticas', 'module' => 'Sueño y Descanso'],
+            ['name' => 'goalsSleep', 'description' => 'Gestionar Metas', 'module' => 'Sueño y Descanso'],
+
             //
             // ['name' => 'show', 'description' => 'Ver ', 'module' => ''],
             // ['name' => 'create', 'description' => 'Crear ', 'module' => ''],

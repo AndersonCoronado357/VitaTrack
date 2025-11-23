@@ -54,6 +54,15 @@
             </li>
         @endif
 
+        @if (\App\Helpers\RoleHelper::isAuthorized('Sueño y Descanso.showSleep'))
+            <li class="nav-item">
+                <a class="nav-link {{ Request::routeIs('sleep.*') ? '' : 'collapsed' }}" href="{{ route('sleep.index') }}">
+                    <i class="bi bi-moon-stars"></i>
+                    <span>Sueño y Descanso</span>
+                </a>
+            </li>
+        @endif
+
         @if (\App\Helpers\RoleHelper::isAuthorized('Usuarios.showUsers'))
             <li class="nav-item">
                 <a class="nav-link {{ Request::routeIs('users.*') ? '' : 'collapsed' }}" href="{{ route('users.index') }}">

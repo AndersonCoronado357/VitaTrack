@@ -93,4 +93,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(HealthMetricRange::class);
     }
+
+    public function sleepRecords()
+    {
+        return $this->hasMany(SleepRecord::class);
+    }
+
+    public function sleepGoal()
+    {
+        return $this->hasOne(SleepGoal::class);
+    }
 }
