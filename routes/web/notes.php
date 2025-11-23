@@ -16,6 +16,10 @@ Route::get('/notes/edit/{id}', [NotesController::class, 'edit'])
      ->name('notes.edit')
      ->middleware(AuthorizedMiddleware::class . ':Notas.updateNotes');
 
+Route::get('/notes/{id}/show', [NotesController::class, 'show'])
+     ->name('notes.show')
+     ->middleware(AuthorizedMiddleware::class . ':Notas.showNotes');
+
 Route::delete('/notes/delete/{id}', [NotesController::class, 'delete'])
      ->name('notes.delete')
      ->middleware(AuthorizedMiddleware::class . ':Notas.deleteNotes');

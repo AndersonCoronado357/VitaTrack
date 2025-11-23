@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MedicationsController;
+use App\Http\Controllers\NotesController;
 use App\Http\Middleware\AuthorizedMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,10 @@ Route::get('/medications/create', [MedicationsController::class, 'create'])
 Route::get('/medications/edit/{id}', [MedicationsController::class, 'edit'])
     ->name('medications.edit')
     ->middleware(AuthorizedMiddleware::class . ':Medicamentos.updateMedications');
+
+Route::get('/medications/{id}/notes', [NotesController::class, 'medicationNotes'])
+    ->name('medications.notes')
+    ->middleware(AuthorizedMiddleware::class . ':Medicamentos.showMedications');
 
 Route::post('/medications/store', [MedicationsController::class, 'store'])
     ->name('medications.store')
