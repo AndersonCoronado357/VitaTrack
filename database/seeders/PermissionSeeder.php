@@ -74,6 +74,13 @@ class PermissionSeeder extends Seeder
             ['name' => 'statsSleep', 'description' => 'Ver Estadísticas', 'module' => 'Sueño y Descanso'],
             ['name' => 'goalsSleep', 'description' => 'Gestionar Metas', 'module' => 'Sueño y Descanso'],
 
+            // Appointments
+            ['name' => 'showAppointments', 'description' => 'Ver Citas', 'module' => 'Citas y Calendario'],
+            ['name' => 'createAppointments', 'description' => 'Crear Citas', 'module' => 'Citas y Calendario'],
+            ['name' => 'updateAppointments', 'description' => 'Editar Citas', 'module' => 'Citas y Calendario'],
+            ['name' => 'deleteAppointments', 'description' => 'Eliminar Citas', 'module' => 'Citas y Calendario'],
+            ['name' => 'calendarAppointments', 'description' => 'Ver Calendario', 'module' => 'Citas y Calendario'],
+
             //
             // ['name' => 'show', 'description' => 'Ver ', 'module' => ''],
             // ['name' => 'create', 'description' => 'Crear ', 'module' => ''],

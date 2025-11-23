@@ -103,4 +103,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(SleepGoal::class);
     }
+
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class);
+    }
 }

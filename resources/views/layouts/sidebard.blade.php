@@ -63,6 +63,15 @@
             </li>
         @endif
 
+        @if (\App\Helpers\RoleHelper::isAuthorized('Citas y Calendario.showAppointments'))
+            <li class="nav-item">
+                <a class="nav-link {{ Request::routeIs('appointments.*') ? '' : 'collapsed' }}" href="{{ route('appointments.index') }}">
+                    <i class="bi bi-calendar-event"></i>
+                    <span>Citas y Calendario</span>
+                </a>
+            </li>
+        @endif
+
         @if (\App\Helpers\RoleHelper::isAuthorized('Usuarios.showUsers'))
             <li class="nav-item">
                 <a class="nav-link {{ Request::routeIs('users.*') ? '' : 'collapsed' }}" href="{{ route('users.index') }}">

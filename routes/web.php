@@ -18,6 +18,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 @include('web/sleep.php');
 
+@include('web/appointments.php');
+
 @include('web/users.php');
 
 @include('web/test.php');
