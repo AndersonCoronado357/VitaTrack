@@ -40,6 +40,13 @@ class PermissionSeeder extends Seeder
             ['name' => 'updateRoles', 'description' => 'Actualizar Roles', 'module' => 'Roles'],
             ['name' => 'deleteRoles', 'description' => 'Eliminar Roles', 'module' => 'Roles'],
 
+            // Habits
+            ['name' => 'showHabits', 'description' => 'Ver Hábitos', 'module' => 'Hábitos'],
+            ['name' => 'createHabits', 'description' => 'Crear Hábitos', 'module' => 'Hábitos'],
+            ['name' => 'updateHabits', 'description' => 'Editar Hábitos', 'module' => 'Hábitos'],
+            ['name' => 'deleteHabits', 'description' => 'Eliminar Hábitos', 'module' => 'Hábitos'],
+            ['name' => 'logHabits', 'description' => 'Registrar Cumplimiento', 'module' => 'Hábitos'],
+            ['name' => 'statsHabits', 'description' => 'Ver Estadísticas', 'module' => 'Hábitos'],
             //
             // ['name' => 'show', 'description' => 'Ver ', 'module' => ''],
             // ['name' => 'create', 'description' => 'Crear ', 'module' => ''],

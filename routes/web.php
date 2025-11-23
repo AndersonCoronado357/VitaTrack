@@ -10,7 +10,11 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 @include('web/notes.php');
 
+@include('web/habits.php');
+
 @include('web/users.php');
+
+@include('web/test.php');
 
 @include('web/roles.php');
 

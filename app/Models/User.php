@@ -63,4 +63,14 @@ class User extends Authenticatable
 
         return "$this->first_name $this->last_name";
     }
+
+    public function habits()
+    {
+        return $this->hasMany(Habit::class);
+    }
+
+    public function habitLogs()
+    {
+        return $this->hasMany(HabitLog::class);
+    }
 }

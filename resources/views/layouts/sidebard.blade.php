@@ -27,6 +27,15 @@
             </li>
         @endif
 
+        @if (\App\Helpers\RoleHelper::isAuthorized('Hábitos.showHabits'))
+            <li class="nav-item">
+                <a class="nav-link {{ Request::routeIs('habits.*') ? '' : 'collapsed' }}" href="{{ route('habits.index') }}">
+                    <i class="bi bi-calendar-check"></i>
+                    <span>Hábitos</span>
+                </a>
+            </li>
+        @endif
+
         @if (\App\Helpers\RoleHelper::isAuthorized('Usuarios.showUsers'))
             <li class="nav-item">
                 <a class="nav-link {{ Request::routeIs('users.*') ? '' : 'collapsed' }}" href="{{ route('users.index') }}">
