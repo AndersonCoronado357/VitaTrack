@@ -83,4 +83,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(NutritionGoal::class);
     }
+
+    public function healthMetrics()
+    {
+        return $this->hasMany(HealthMetric::class);
+    }
+
+    public function healthMetricRanges()
+    {
+        return $this->hasMany(HealthMetricRange::class);
+    }
 }

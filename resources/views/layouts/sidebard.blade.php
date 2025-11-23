@@ -45,6 +45,15 @@
             </li>
         @endif
 
+        @if (\App\Helpers\RoleHelper::isAuthorized('Métricas de Salud.showHealthMetrics'))
+            <li class="nav-item">
+                <a class="nav-link {{ Request::routeIs('health-metrics.*') ? '' : 'collapsed' }}" href="{{ route('health-metrics.index') }}">
+                    <i class="bi bi-heart-pulse"></i>
+                    <span>Métricas de Salud</span>
+                </a>
+            </li>
+        @endif
+
         @if (\App\Helpers\RoleHelper::isAuthorized('Usuarios.showUsers'))
             <li class="nav-item">
                 <a class="nav-link {{ Request::routeIs('users.*') ? '' : 'collapsed' }}" href="{{ route('users.index') }}">

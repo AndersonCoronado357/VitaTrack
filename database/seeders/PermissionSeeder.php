@@ -57,6 +57,14 @@ class PermissionSeeder extends Seeder
             ['name' => 'statsNutrition', 'description' => 'Ver Estadísticas', 'module' => 'Nutrición'],
             ['name' => 'goalsNutrition', 'description' => 'Gestionar Metas', 'module' => 'Nutrición'],
 
+            // Health Metrics
+            ['name' => 'showHealthMetrics', 'description' => 'Ver Métricas', 'module' => 'Métricas de Salud'],
+            ['name' => 'createHealthMetrics', 'description' => 'Registrar Métricas', 'module' => 'Métricas de Salud'],
+            ['name' => 'updateHealthMetrics', 'description' => 'Editar Métricas', 'module' => 'Métricas de Salud'],
+            ['name' => 'deleteHealthMetrics', 'description' => 'Eliminar Métricas', 'module' => 'Métricas de Salud'],
+            ['name' => 'statsHealthMetrics', 'description' => 'Ver Estadísticas', 'module' => 'Métricas de Salud'],
+            ['name' => 'rangesHealthMetrics', 'description' => 'Configurar Rangos', 'module' => 'Métricas de Salud'],
+
             //
             // ['name' => 'show', 'description' => 'Ver ', 'module' => ''],
             // ['name' => 'create', 'description' => 'Crear ', 'module' => ''],
