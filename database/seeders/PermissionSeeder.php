@@ -47,6 +47,16 @@ class PermissionSeeder extends Seeder
             ['name' => 'deleteHabits', 'description' => 'Eliminar Hábitos', 'module' => 'Hábitos'],
             ['name' => 'logHabits', 'description' => 'Registrar Cumplimiento', 'module' => 'Hábitos'],
             ['name' => 'statsHabits', 'description' => 'Ver Estadísticas', 'module' => 'Hábitos'],
+
+            // Nutrition
+            ['name' => 'showNutrition', 'description' => 'Ver Nutrición', 'module' => 'Nutrición'],
+            ['name' => 'createNutrition', 'description' => 'Registrar Comidas', 'module' => 'Nutrición'],
+            ['name' => 'updateNutrition', 'description' => 'Editar Registros', 'module' => 'Nutrición'],
+            ['name' => 'deleteNutrition', 'description' => 'Eliminar Registros', 'module' => 'Nutrición'],
+            ['name' => 'historyNutrition', 'description' => 'Ver Historial', 'module' => 'Nutrición'],
+            ['name' => 'statsNutrition', 'description' => 'Ver Estadísticas', 'module' => 'Nutrición'],
+            ['name' => 'goalsNutrition', 'description' => 'Gestionar Metas', 'module' => 'Nutrición'],
+
             //
             // ['name' => 'show', 'description' => 'Ver ', 'module' => ''],
             // ['name' => 'create', 'description' => 'Crear ', 'module' => ''],
