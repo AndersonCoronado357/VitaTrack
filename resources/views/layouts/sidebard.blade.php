@@ -5,7 +5,7 @@
         <li class="nav-item">
             <a class="nav-link {{ Request::is('/') ? '' : 'collapsed' }} " href="/">
                 <i class="bi bi-speedometer2"></i>
-                <span>Dashboard</span>
+                <span>Home</span>
             </a>
         </li>
 

@@ -1,649 +1,352 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="pagetitle">
-        <h1>Dashboard</h1>
+        <h1>Panel de Salud</h1>
         <nav>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-            <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ route('home.index') }}">Home</a></li>
+                <li class="breadcrumb-item active">Panel Principal</li>
+            </ol>
         </nav>
-    </div><!-- End Page Title -->
+    </div>
 
     <section class="section dashboard">
         <div class="row">
-
-        <!-- Left side columns -->
-        <div class="col-lg-8">
-            <div class="row">
-
-            <!-- Sales Card -->
-            <div class="col-xxl-4 col-md-6">
-                <div class="card info-card sales-card">
-
-                <div class="filter">
-                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                        <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                    </ul>
-                </div>
-
-                <div class="card-body">
-                    <h5 class="card-title">Sales <span>| Today</span></h5>
-
-                    <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i class="bi bi-cart"></i>
-                    </div>
-                    <div class="ps-3">
-                        <h6>145</h6>
-                        <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
-                    </div>
-                    </div>
-                </div>
-
-                </div>
-            </div><!-- End Sales Card -->
-
-            <!-- Revenue Card -->
-            <div class="col-xxl-4 col-md-6">
-                <div class="card info-card revenue-card">
-
-                <div class="filter">
-                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                        <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                    </ul>
-                </div>
-
-                <div class="card-body">
-                    <h5 class="card-title">Revenue <span>| This Month</span></h5>
-
-                    <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i class="bi bi-currency-dollar"></i>
-                    </div>
-                    <div class="ps-3">
-                        <h6>$3,264</h6>
-                        <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
-
-                    </div>
-                    </div>
-                </div>
-
-                </div>
-            </div><!-- End Revenue Card -->
-
-            <!-- Customers Card -->
-            <div class="col-xxl-4 col-xl-12">
-
-                <div class="card info-card customers-card">
-
-                <div class="filter">
-                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                        <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                    </ul>
-                </div>
-
-                <div class="card-body">
-                    <h5 class="card-title">Customers <span>| This Year</span></h5>
-
-                    <div class="d-flex align-items-center">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                        <i class="bi bi-people"></i>
-                    </div>
-                    <div class="ps-3">
-                        <h6>1244</h6>
-                        <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
-
-                    </div>
+            <!-- Columna izquierda -->
+            <div class="col-lg-8">
+                <div class="row">
+                    <!-- Bienvenida -->
+                    <div class="col-12">
+                        <div class="card info-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center py-3">
+                                    <div class="flex-grow-1">
+                                        <h3 class="mb-2">VitaTrack</h3>
+                                        <p class="mb-0 opacity-75">
+                                            <i class="bi bi-calendar-event me-2"></i>
+                                            {{ \Carbon\Carbon::now()->locale('es')->isoFormat('dddd, D [de] MMMM [de] YYYY') }}
+                                        </p>
+                                        <p class="mb-0 mt-2 opacity-90">
+                                            Gestiona tu bienestar de forma integral
+                                        </p>
+                                    </div>
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center" style="background-color: rgba(255,255,255,0.2); width: 80px; height: 80px;">
+                                        <i class="bi bi-heart-pulse" style="font-size: 2.5rem;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
-                </div>
-                </div>
+                    <!-- Módulos del sistema -->
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Módulos Disponibles</h5>
+                                <div class="row">
+                                    @if (\App\Helpers\RoleHelper::isAuthorized('Medicamentos.showMedications'))
+                                        <div class="col-md-6 mb-4">
+                                            <div class="card h-100 border-0 shadow-sm">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <div class="rounded-circle d-flex align-items-center justify-content-center me-3"
+                                                             style="width: 60px; height: 60px; background-color: #ffe7f3; color: #dc3545;">
+                                                            <i class="bi bi-capsule" style="font-size: 2rem;"></i>
+                                                        </div>
+                                                        <div>
+                                                            <h5 class="mb-0">Medicamentos</h5>
+                                                            <small class="text-muted">Gestión farmacológica</small>
+                                                        </div>
+                                                    </div>
+                                                    <p class="mb-3">Registra y controla tus medicamentos, dosis, horarios y tratamientos activos.</p>
+                                                    <a href="{{ route('medications.index') }}" class="btn btn-outline-danger btn-sm">
+                                                        <i class="bi bi-arrow-right-circle"></i> Ir al módulo
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
 
-            </div><!-- End Customers Card -->
+                                    @if (\App\Helpers\RoleHelper::isAuthorized('Notas.showNotes'))
+                                        <div class="col-md-6 mb-4">
+                                            <div class="card h-100 border-0 shadow-sm">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <div class="rounded-circle d-flex align-items-center justify-content-center me-3"
+                                                             style="width: 60px; height: 60px; background-color: #fff3cd; color: #ffc107;">
+                                                            <i class="bi bi-journal-text" style="font-size: 2rem;"></i>
+                                                        </div>
+                                                        <div>
+                                                            <h5 class="mb-0">Notas de Salud</h5>
+                                                            <small class="text-muted">Registro clínico</small>
+                                                        </div>
+                                                    </div>
+                                                    <p class="mb-3">Documenta síntomas, observaciones y notas importantes sobre tu salud.</p>
+                                                    <a href="{{ route('notes.index') }}" class="btn btn-outline-warning btn-sm">
+                                                        <i class="bi bi-arrow-right-circle"></i> Ir al módulo
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
 
-            <!-- Reports -->
-            <div class="col-12">
+                                    @if (\App\Helpers\RoleHelper::isAuthorized('Hábitos.showHabits'))
+                                        <div class="col-md-6 mb-4">
+                                            <div class="card h-100 border-0 shadow-sm">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <div class="rounded-circle d-flex align-items-center justify-content-center me-3"
+                                                             style="width: 60px; height: 60px; background-color: #e7ffe7; color: #28a745;">
+                                                            <i class="bi bi-calendar-check" style="font-size: 2rem;"></i>
+                                                        </div>
+                                                        <div>
+                                                            <h5 class="mb-0">Hábitos Saludables</h5>
+                                                            <small class="text-muted">Seguimiento de rutinas</small>
+                                                        </div>
+                                                    </div>
+                                                    <p class="mb-3">Crea y monitorea hábitos diarios con seguimiento de rachas y estadísticas.</p>
+                                                    <a href="{{ route('habits.index') }}" class="btn btn-outline-success btn-sm">
+                                                        <i class="bi bi-arrow-right-circle"></i> Ir al módulo
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    @if (\App\Helpers\RoleHelper::isAuthorized('Nutrición.showNutrition'))
+                                        <div class="col-md-6 mb-4">
+                                            <div class="card h-100 border-0 shadow-sm">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <div class="rounded-circle d-flex align-items-center justify-content-center me-3"
+                                                             style="width: 60px; height: 60px; background-color: #d4edda; color: #155724;">
+                                                            <i class="bi bi-egg-fried" style="font-size: 2rem;"></i>
+                                                        </div>
+                                                        <div>
+                                                            <h5 class="mb-0">Nutrición y Dieta</h5>
+                                                            <small class="text-muted">Control alimenticio</small>
+                                                        </div>
+                                                    </div>
+                                                    <p class="mb-3">Registra comidas, calorías, macronutrientes y alcanza tus metas nutricionales.</p>
+                                                    <a href="{{ route('nutrition.index') }}" class="btn btn-outline-success btn-sm">
+                                                        <i class="bi bi-arrow-right-circle"></i> Ir al módulo
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    @if (\App\Helpers\RoleHelper::isAuthorized('Métricas de Salud.showHealthMetrics'))
+                                        <div class="col-md-6 mb-4">
+                                            <div class="card h-100 border-0 shadow-sm">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <div class="rounded-circle d-flex align-items-center justify-content-center me-3"
+                                                             style="width: 60px; height: 60px; background-color: #cfe2ff; color: #084298;">
+                                                            <i class="bi bi-heart-pulse" style="font-size: 2rem;"></i>
+                                                        </div>
+                                                        <div>
+                                                            <h5 class="mb-0">Métricas de Salud</h5>
+                                                            <small class="text-muted">Monitoreo vital</small>
+                                                        </div>
+                                                    </div>
+                                                    <p class="mb-3">Registra presión arterial, glucosa, peso y otras métricas con alertas personalizadas.</p>
+                                                    <a href="{{ route('health-metrics.index') }}" class="btn btn-outline-primary btn-sm">
+                                                        <i class="bi bi-arrow-right-circle"></i> Ir al módulo
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    @if (\App\Helpers\RoleHelper::isAuthorized('Sueño y Descanso.showSleep'))
+                                        <div class="col-md-6 mb-4">
+                                            <div class="card h-100 border-0 shadow-sm">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <div class="rounded-circle d-flex align-items-center justify-content-center me-3"
+                                                             style="width: 60px; height: 60px; background-color: #f3e7ff; color: #6f42c1;">
+                                                            <i class="bi bi-moon-stars" style="font-size: 2rem;"></i>
+                                                        </div>
+                                                        <div>
+                                                            <h5 class="mb-0">Sueño y Descanso</h5>
+                                                            <small class="text-muted">Calidad del sueño</small>
+                                                        </div>
+                                                    </div>
+                                                    <p class="mb-3">Registra horas de sueño, calidad y establece metas para un mejor descanso.</p>
+                                                    <a href="{{ route('sleep.index') }}" class="btn btn-outline-purple btn-sm" style="border-color: #6f42c1; color: #6f42c1;">
+                                                        <i class="bi bi-arrow-right-circle"></i> Ir al módulo
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+
+                                    @if (\App\Helpers\RoleHelper::isAuthorized('Citas y Calendario.showAppointments'))
+                                        <div class="col-md-6 mb-4">
+                                            <div class="card h-100 border-0 shadow-sm">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-center mb-3">
+                                                        <div class="rounded-circle d-flex align-items-center justify-content-center me-3"
+                                                             style="width: 60px; height: 60px; background-color: #e7f3ff; color: #0d6efd;">
+                                                            <i class="bi bi-calendar-event" style="font-size: 2rem;"></i>
+                                                        </div>
+                                                        <div>
+                                                            <h5 class="mb-0">Citas y Calendario</h5>
+                                                            <small class="text-muted">Agenda médica</small>
+                                                        </div>
+                                                    </div>
+                                                    <p class="mb-3">Programa citas médicas, eventos y recibe recordatorios en el calendario.</p>
+                                                    <a href="{{ route('appointments.index') }}" class="btn btn-outline-primary btn-sm">
+                                                        <i class="bi bi-arrow-right-circle"></i> Ir al módulo
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Información del sistema -->
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Sobre el Sistema</h5>
+                                <p>
+                                    Este sistema integral te permite gestionar todos los aspectos de tu salud personal en un solo lugar.
+                                    Mantén un registro completo y organizado de tu información médica, hábitos, nutrición y bienestar general.
+                                </p>
+                                <div class="row mt-4">
+                                    <div class="col-md-4 text-center mb-3">
+                                        <i class="bi bi-shield-check text-success" style="font-size: 3rem;"></i>
+                                        <h6 class="mt-2">Seguro</h6>
+                                        <small class="text-muted">Tus datos están protegidos</small>
+                                    </div>
+                                    <div class="col-md-4 text-center mb-3">
+                                        <i class="bi bi-graph-up-arrow text-primary" style="font-size: 3rem;"></i>
+                                        <h6 class="mt-2">Estadísticas</h6>
+                                        <small class="text-muted">Visualiza tu progreso</small>
+                                    </div>
+                                    <div class="col-md-4 text-center mb-3">
+                                        <i class="bi bi-bell text-warning" style="font-size: 3rem;"></i>
+                                        <h6 class="mt-2">Recordatorios</h6>
+                                        <small class="text-muted">No olvides nada importante</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Columna derecha -->
+            <div class="col-lg-4">
+                <!-- Accesos rápidos -->
                 <div class="card">
-
-                <div class="filter">
-                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                        <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                    </ul>
-                </div>
-
-                <div class="card-body">
-                    <h5 class="card-title">Reports <span>/Today</span></h5>
-
-                    <!-- Line Chart -->
-                    <div id="reportsChart"></div>
-
-                    <script>
-                    document.addEventListener("DOMContentLoaded", () => {
-                        new ApexCharts(document.querySelector("#reportsChart"), {
-                        series: [{
-                            name: 'Sales',
-                            data: [31, 40, 28, 51, 42, 82, 56],
-                        }, {
-                            name: 'Revenue',
-                            data: [11, 32, 45, 32, 34, 52, 41]
-                        }, {
-                            name: 'Customers',
-                            data: [15, 11, 32, 18, 9, 24, 11]
-                        }],
-                        chart: {
-                            height: 350,
-                            type: 'area',
-                            toolbar: {
-                            show: false
-                            },
-                        },
-                        markers: {
-                            size: 4
-                        },
-                        colors: ['#4154f1', '#2eca6a', '#ff771d'],
-                        fill: {
-                            type: "gradient",
-                            gradient: {
-                            shadeIntensity: 1,
-                            opacityFrom: 0.3,
-                            opacityTo: 0.4,
-                            stops: [0, 90, 100]
-                            }
-                        },
-                        dataLabels: {
-                            enabled: false
-                        },
-                        stroke: {
-                            curve: 'smooth',
-                            width: 2
-                        },
-                        xaxis: {
-                            type: 'datetime',
-                            categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-                        },
-                        tooltip: {
-                            x: {
-                            format: 'dd/MM/yy HH:mm'
-                            },
-                        }
-                        }).render();
-                    });
-                    </script>
-                    <!-- End Line Chart -->
-
-                </div>
-
-                </div>
-            </div><!-- End Reports -->
-
-            <!-- Recent Sales -->
-            <div class="col-12">
-                <div class="card recent-sales overflow-auto">
-
-                <div class="filter">
-                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                        <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                    </ul>
-                </div>
-
-                <div class="card-body">
-                    <h5 class="card-title">Recent Sales <span>| Today</span></h5>
-
-                    <table class="table table-borderless datatable">
-                    <thead>
-                        <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Customer</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        <th scope="row"><a href="#">#2457</a></th>
-                        <td>Brandon Jacob</td>
-                        <td><a href="#" class="text-primary">At praesentium minu</a></td>
-                        <td>$64</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                        </tr>
-                        <tr>
-                        <th scope="row"><a href="#">#2147</a></th>
-                        <td>Bridie Kessler</td>
-                        <td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td>
-                        <td>$47</td>
-                        <td><span class="badge bg-warning">Pending</span></td>
-                        </tr>
-                        <tr>
-                        <th scope="row"><a href="#">#2049</a></th>
-                        <td>Ashleigh Langosh</td>
-                        <td><a href="#" class="text-primary">At recusandae consectetur</a></td>
-                        <td>$147</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                        </tr>
-                        <tr>
-                        <th scope="row"><a href="#">#2644</a></th>
-                        <td>Angus Grady</td>
-                        <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>
-                        <td>$67</td>
-                        <td><span class="badge bg-danger">Rejected</span></td>
-                        </tr>
-                        <tr>
-                        <th scope="row"><a href="#">#2644</a></th>
-                        <td>Raheem Lehner</td>
-                        <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                        <td>$165</td>
-                        <td><span class="badge bg-success">Approved</span></td>
-                        </tr>
-                    </tbody>
-                    </table>
-
-                </div>
-
-                </div>
-            </div><!-- End Recent Sales -->
-
-            <!-- Top Selling -->
-            <div class="col-12">
-                <div class="card top-selling overflow-auto">
-
-                <div class="filter">
-                    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <li class="dropdown-header text-start">
-                        <h6>Filter</h6>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Today</a></li>
-                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                    <li><a class="dropdown-item" href="#">This Year</a></li>
-                    </ul>
-                </div>
-
-                <div class="card-body pb-0">
-                    <h5 class="card-title">Top Selling <span>| Today</span></h5>
-
-                    <table class="table table-borderless">
-                    <thead>
-                        <tr>
-                        <th scope="col">Preview</th>
-                        <th scope="col">Product</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Sold</th>
-                        <th scope="col">Revenue</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        <th scope="row"><a href="#"><img src="assets/img/product-1.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Ut inventore ipsa voluptas nulla</a></td>
-                        <td>$64</td>
-                        <td class="fw-bold">124</td>
-                        <td>$5,828</td>
-                        </tr>
-                        <tr>
-                        <th scope="row"><a href="#"><img src="assets/img/product-2.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Exercitationem similique doloremque</a></td>
-                        <td>$46</td>
-                        <td class="fw-bold">98</td>
-                        <td>$4,508</td>
-                        </tr>
-                        <tr>
-                        <th scope="row"><a href="#"><img src="assets/img/product-3.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Doloribus nisi exercitationem</a></td>
-                        <td>$59</td>
-                        <td class="fw-bold">74</td>
-                        <td>$4,366</td>
-                        </tr>
-                        <tr>
-                        <th scope="row"><a href="#"><img src="assets/img/product-4.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Officiis quaerat sint rerum error</a></td>
-                        <td>$32</td>
-                        <td class="fw-bold">63</td>
-                        <td>$2,016</td>
-                        </tr>
-                        <tr>
-                        <th scope="row"><a href="#"><img src="assets/img/product-5.jpg" alt=""></a></th>
-                        <td><a href="#" class="text-primary fw-bold">Sit unde debitis delectus repellendus</a></td>
-                        <td>$79</td>
-                        <td class="fw-bold">41</td>
-                        <td>$3,239</td>
-                        </tr>
-                    </tbody>
-                    </table>
-
-                </div>
-
-                </div>
-            </div><!-- End Top Selling -->
-
-            </div>
-        </div><!-- End Left side columns -->
-
-        <!-- Right side columns -->
-        <div class="col-lg-4">
-
-            <!-- Recent Activity -->
-            <div class="card">
-            <div class="filter">
-                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                    <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-                </ul>
-            </div>
-
-            <div class="card-body">
-                <h5 class="card-title">Recent Activity <span>| Today</span></h5>
-
-                <div class="activity">
-
-                <div class="activity-item d-flex">
-                    <div class="activite-label">32 min</div>
-                    <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
-                    <div class="activity-content">
-                    Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a> beatae
+                    <div class="card-body">
+                        <h5 class="card-title">Accesos Rápidos</h5>
+                        <div class="d-grid gap-2">
+                            @if (\App\Helpers\RoleHelper::isAuthorized('Citas y Calendario.createAppointments'))
+                                <a href="{{ route('appointments.create') }}" class="btn btn-primary">
+                                    <i class="bi bi-calendar-plus me-2"></i> Nueva Cita
+                                </a>
+                            @endif
+                            @if (\App\Helpers\RoleHelper::isAuthorized('Medicamentos.createMedication'))
+                                <a href="{{ route('medications.create') }}" class="btn btn-danger">
+                                    <i class="bi bi-capsule-pill me-2"></i> Registrar Medicamento
+                                </a>
+                            @endif
+                            @if (\App\Helpers\RoleHelper::isAuthorized('Nutrición.createNutrition'))
+                                <a href="{{ route('nutrition.create') }}" class="btn btn-success">
+                                    <i class="bi bi-egg-fried me-2"></i> Registrar Comida
+                                </a>
+                            @endif
+                            @if (\App\Helpers\RoleHelper::isAuthorized('Sueño y Descanso.createSleep'))
+                                <a href="{{ route('sleep.create') }}" class="btn btn-info">
+                                    <i class="bi bi-moon-stars me-2"></i> Registrar Sueño
+                                </a>
+                            @endif
+                            @if (\App\Helpers\RoleHelper::isAuthorized('Métricas de Salud.createHealthMetrics'))
+                                <a href="{{ route('health-metrics.create') }}" class="btn btn-warning">
+                                    <i class="bi bi-heart-pulse me-2"></i> Registrar Métrica
+                                </a>
+                            @endif
+                        </div>
                     </div>
-                </div><!-- End activity item-->
+                </div>
 
-                <div class="activity-item d-flex">
-                    <div class="activite-label">56 min</div>
-                    <i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
-                    <div class="activity-content">
-                    Voluptatem blanditiis blanditiis eveniet
+                <!-- Consejos de salud -->
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="bi bi-lightbulb text-warning"></i> Consejos de Salud
+                        </h5>
+                        <div class="news">
+                            <div class="post-item clearfix mb-3 pb-3 border-bottom">
+                                <i class="bi bi-droplet text-primary" style="font-size: 2rem;"></i>
+                                <h6 class="mt-2">Hidratación</h6>
+                                <p><small>Bebe al menos 8 vasos de agua al día para mantener tu cuerpo hidratado.</small></p>
+                            </div>
+
+                            <div class="post-item clearfix mb-3 pb-3 border-bottom">
+                                <i class="bi bi-moon-stars text-info" style="font-size: 2rem;"></i>
+                                <h6 class="mt-2">Sueño de Calidad</h6>
+                                <p><small>Duerme entre 7-9 horas diarias para una óptima recuperación física y mental.</small></p>
+                            </div>
+
+                            <div class="post-item clearfix mb-3 pb-3 border-bottom">
+                                <i class="bi bi-person-walking text-success" style="font-size: 2rem;"></i>
+                                <h6 class="mt-2">Actividad Física</h6>
+                                <p><small>Realiza al menos 30 minutos de ejercicio moderado 5 días a la semana.</small></p>
+                            </div>
+
+                            <div class="post-item clearfix mb-3">
+                                <i class="bi bi-heart-pulse text-danger" style="font-size: 2rem;"></i>
+                                <h6 class="mt-2">Chequeos Regulares</h6>
+                                <p><small>Visita a tu médico regularmente para prevenir y detectar a tiempo cualquier problema.</small></p>
+                            </div>
+                        </div>
                     </div>
-                </div><!-- End activity item-->
+                </div>
 
-                <div class="activity-item d-flex">
-                    <div class="activite-label">2 hrs</div>
-                    <i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
-                    <div class="activity-content">
-                    Voluptates corrupti molestias voluptatem
+                <!-- Funcionalidades destacadas -->
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="bi bi-star text-warning"></i> Funcionalidades Destacadas
+                        </h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                Seguimiento de medicamentos y recordatorios
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                Control nutricional con cálculo de macros
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                Monitoreo de métricas vitales
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                Calendario de citas médicas
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                Seguimiento de hábitos saludables
+                            </li>
+                            <li class="mb-2">
+                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                Registro de calidad del sueño
+                            </li>
+                        </ul>
                     </div>
-                </div><!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                    <div class="activite-label">1 day</div>
-                    <i class='bi bi-circle-fill activity-badge text-info align-self-start'></i>
-                    <div class="activity-content">
-                    Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati voluptatem</a> tempore
-                    </div>
-                </div><!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                    <div class="activite-label">2 days</div>
-                    <i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
-                    <div class="activity-content">
-                    Est sit eum reiciendis exercitationem
-                    </div>
-                </div><!-- End activity item-->
-
-                <div class="activity-item d-flex">
-                    <div class="activite-label">4 weeks</div>
-                    <i class='bi bi-circle-fill activity-badge text-muted align-self-start'></i>
-                    <div class="activity-content">
-                    Dicta dolorem harum nulla eius. Ut quidem quidem sit quas
-                    </div>
-                </div><!-- End activity item-->
-
                 </div>
-
             </div>
-            </div><!-- End Recent Activity -->
-
-            <!-- Budget Report -->
-            <div class="card">
-            <div class="filter">
-                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                    <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-                </ul>
-            </div>
-
-            <div class="card-body pb-0">
-                <h5 class="card-title">Budget Report <span>| This Month</span></h5>
-
-                <div id="budgetChart" style="min-height: 400px;" class="echart"></div>
-
-                <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                    var budgetChart = echarts.init(document.querySelector("#budgetChart")).setOption({
-                    legend: {
-                        data: ['Allocated Budget', 'Actual Spending']
-                    },
-                    radar: {
-                        // shape: 'circle',
-                        indicator: [{
-                            name: 'Sales',
-                            max: 6500
-                        },
-                        {
-                            name: 'Administration',
-                            max: 16000
-                        },
-                        {
-                            name: 'Information Technology',
-                            max: 30000
-                        },
-                        {
-                            name: 'Customer Support',
-                            max: 38000
-                        },
-                        {
-                            name: 'Development',
-                            max: 52000
-                        },
-                        {
-                            name: 'Marketing',
-                            max: 25000
-                        }
-                        ]
-                    },
-                    series: [{
-                        name: 'Budget vs spending',
-                        type: 'radar',
-                        data: [{
-                            value: [4200, 3000, 20000, 35000, 50000, 18000],
-                            name: 'Allocated Budget'
-                        },
-                        {
-                            value: [5000, 14000, 28000, 26000, 42000, 21000],
-                            name: 'Actual Spending'
-                        }
-                        ]
-                    }]
-                    });
-                });
-                </script>
-
-            </div>
-            </div><!-- End Budget Report -->
-
-            <!-- Website Traffic -->
-            <div class="card">
-            <div class="filter">
-                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                    <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-                </ul>
-            </div>
-
-            <div class="card-body pb-0">
-                <h5 class="card-title">Website Traffic <span>| Today</span></h5>
-
-                <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
-
-                <script>
-                document.addEventListener("DOMContentLoaded", () => {
-                    echarts.init(document.querySelector("#trafficChart")).setOption({
-                    tooltip: {
-                        trigger: 'item'
-                    },
-                    legend: {
-                        top: '5%',
-                        left: 'center'
-                    },
-                    series: [{
-                        name: 'Access From',
-                        type: 'pie',
-                        radius: ['40%', '70%'],
-                        avoidLabelOverlap: false,
-                        label: {
-                        show: false,
-                        position: 'center'
-                        },
-                        emphasis: {
-                        label: {
-                            show: true,
-                            fontSize: '18',
-                            fontWeight: 'bold'
-                        }
-                        },
-                        labelLine: {
-                        show: false
-                        },
-                        data: [{
-                            value: 1048,
-                            name: 'Search Engine'
-                        },
-                        {
-                            value: 735,
-                            name: 'Direct'
-                        },
-                        {
-                            value: 580,
-                            name: 'Email'
-                        },
-                        {
-                            value: 484,
-                            name: 'Union Ads'
-                        },
-                        {
-                            value: 300,
-                            name: 'Video Ads'
-                        }
-                        ]
-                    }]
-                    });
-                });
-                </script>
-
-            </div>
-            </div><!-- End Website Traffic -->
-
-            <!-- News & Updates Traffic -->
-            <div class="card">
-            <div class="filter">
-                <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <li class="dropdown-header text-start">
-                    <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-                </ul>
-            </div>
-
-            <div class="card-body pb-0">
-                <h5 class="card-title">News &amp; Updates <span>| Today</span></h5>
-
-                <div class="news">
-                <div class="post-item clearfix">
-                    <img src="assets/img/news-1.jpg" alt="">
-                    <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                    <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                    <img src="assets/img/news-2.jpg" alt="">
-                    <h4><a href="#">Quidem autem et impedit</a></h4>
-                    <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona nande...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                    <img src="assets/img/news-3.jpg" alt="">
-                    <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
-                    <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                    <img src="assets/img/news-4.jpg" alt="">
-                    <h4><a href="#">Laborum corporis quo dara net para</a></h4>
-                    <p>Qui enim quia optio. Eligendi aut asperiores enim repellendusvel rerum cuder...</p>
-                </div>
-
-                <div class="post-item clearfix">
-                    <img src="assets/img/news-5.jpg" alt="">
-                    <h4><a href="#">Et dolores corrupti quae illo quod dolor</a></h4>
-                    <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos eius...</p>
-                </div>
-
-                </div><!-- End sidebar recent posts-->
-
-            </div>
-            </div><!-- End News & Updates -->
-
-        </div><!-- End Right side columns -->
-
         </div>
     </section>
-
 @endsection
