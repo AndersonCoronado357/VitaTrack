@@ -15,5 +15,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(PermissionSeeder::class);
         $this->call(UserRoleSeeder::class);
+        $this->call(HabitSeeder::class);
+        $this->call(NutritionSeeder::class);
+        $this->call(HealthMetricsSeeder::class);
+        $this->call(SleepSeeder::class);
+        $this->call(AppointmentsSeeder::class);
     }
 }

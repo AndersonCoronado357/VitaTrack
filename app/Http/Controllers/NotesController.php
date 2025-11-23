@@ -6,6 +6,7 @@ use App\Models\Note;
 use App\Models\Medications;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -23,6 +24,7 @@ class NotesController extends Controller
         }
 
         $notes = Note::with('medication')
+            ->where('user_id', Auth::id())
             ->where('title', 'LIKE', "%$request->filter%")
             ->paginate($request->records_per_page);
 
@@ -31,7 +33,7 @@ class NotesController extends Controller
 
     public function create()
     {
-        $medications = Medications::all();
+        $medications = Medications::where('user_id', Auth::id())->get();
         return view('notes/create', ['medications' => $medications]);
     }
 
@@ -50,14 +52,29 @@ class NotesController extends Controller
         ])->validate();
 
         try {
+            $medication = Medications::where('id', $request->medication_id)
+                                    ->where('user_id', Auth::id())
+                                    ->first();
+
+            if (empty($medication)) {
+                Session::flash('message', ['content' => 'No tienes permiso para agregar notas a este medicamento.', 'type' => 'error']);
+                return redirect()->back();
+            }
+
             $note = new Note();
             $note->title = $request->title;
             $note->content = $request->content;
             $note->medication_id = $request->medication_id;
+            $note->user_id = Auth::id();
             $note->save();
 
             Session::flash('message', ['content' => 'Nota creada con éxito', 'type' => 'success']);
-            return redirect()->action([NotesController::class, 'index']);
+
+            if ($request->has('from_medication')) {
+                return redirect()->route('medications.notes', $request->medication_id);
+            }
+
+            return redirect()->route('notes.index');
         } catch (Exception $ex) {
             Log::error($ex);
             Session::flash('message', ['content' => 'Ha ocurrido un error al crear la nota.', 'type' => 'error']);
@@ -67,14 +84,16 @@ class NotesController extends Controller
 
     public function edit($id)
     {
-        $note = Note::find($id);
+        $note = Note::where('id', $id)
+                    ->where('user_id', Auth::id())
+                    ->first();
 
         if (empty($note)) {
-            Session::flash('message', ['content' => "La nota con id: '$id' no existe.", 'type' => 'error']);
+            Session::flash('message', ['content' => "La nota con id: '$id' no existe o no tienes permiso para editarla.", 'type' => 'error']);
             return redirect()->back();
         }
 
-        $medications = Medications::all();
+        $medications = Medications::where('user_id', Auth::id())->get();
 
         return view('notes/edit', [
             'note' => $note,
@@ -100,14 +119,36 @@ class NotesController extends Controller
         ])->validate();
 
         try {
-            $note = Note::find($request->note_id);
+            $note = Note::where('id', $request->note_id)
+                        ->where('user_id', Auth::id())
+                        ->first();
+
+            if (empty($note)) {
+                Session::flash('message', ['content' => 'No tienes permiso para editar esta nota.', 'type' => 'error']);
+                return redirect()->back();
+            }
+
+            $medication = Medications::where('id', $request->medication_id)
+                                    ->where('user_id', Auth::id())
+                                    ->first();
+
+            if (empty($medication)) {
+                Session::flash('message', ['content' => 'No tienes permiso para asociar esta nota a ese medicamento.', 'type' => 'error']);
+                return redirect()->back();
+            }
+
             $note->title = $request->title;
             $note->content = $request->content;
             $note->medication_id = $request->medication_id;
             $note->save();
 
             Session::flash('message', ['content' => 'Nota actualizada con éxito', 'type' => 'success']);
-            return redirect()->action([NotesController::class, 'index']);
+
+            if ($request->has('from_medication')) {
+                return redirect()->route('medications.notes', $request->medication_id);
+            }
+
+            return redirect()->route('notes.index');
         } catch (Exception $ex) {
             Log::error($ex);
             Session::flash('message', ['content' => 'Ha ocurrido un error al actualizar la nota.', 'type' => 'error']);
@@ -118,21 +159,59 @@ class NotesController extends Controller
     public function delete($id)
     {
         try {
-            $note = Note::find($id);
+            $note = Note::where('id', $id)
+                        ->where('user_id', Auth::id())
+                        ->first();
 
             if (empty($note)) {
-                Session::flash('message', ['content' => "La nota con id: '$id' no existe.", 'type' => 'error']);
+                Session::flash('message', ['content' => "La nota con id: '$id' no existe o no tienes permiso para eliminarla.", 'type' => 'error']);
                 return redirect()->back();
             }
 
             $note->delete();
 
             Session::flash('message', ['content' => 'Nota eliminada con éxito', 'type' => 'success']);
-            return redirect()->action([NotesController::class, 'index']);
+            return redirect()->back();
         } catch (Exception $ex) {
             Log::error($ex);
             Session::flash('message', ['content' => 'Ha ocurrido un error al eliminar la nota.', 'type' => 'error']);
             return redirect()->back();
         }
+    }
+
+    public function show($id)
+    {
+        $note = Note::where('id', $id)
+                    ->where('user_id', Auth::id())
+                    ->with('medication')
+                    ->first();
+
+        if (empty($note)) {
+            Session::flash('message', ['content' => "La nota no existe o no tienes permiso para verla.", 'type' => 'error']);
+            return redirect()->back();
+        }
+
+        return view('notes/show', ['note' => $note]);
+    }
+
+    public function medicationNotes($medication_id)
+    {
+        $medication = Medications::where('id', $medication_id)
+                                ->where('user_id', Auth::id())
+                                ->first();
+
+        if (empty($medication)) {
+            Session::flash('message', ['content' => "El medicamento no existe o no tienes permiso para ver sus notas.", 'type' => 'error']);
+            return redirect()->back();
+        }
+
+        $notes = Note::where('medication_id', $medication_id)
+                    ->where('user_id', Auth::id())
+                    ->get();
+
+        return view('medications/notes', [
+            'medication' => $medication,
+            'notes' => $notes
+        ]);
     }
 }

@@ -10,7 +10,19 @@ Route::get('/', [HomeController::class, 'index'])->name('home.index');
 
 @include('web/notes.php');
 
+@include('web/habits.php');
+
+@include('web/nutrition.php');
+
+@include('web/health-metrics.php');
+
+@include('web/sleep.php');
+
+@include('web/appointments.php');
+
 @include('web/users.php');
+
+@include('web/test.php');
 
 @include('web/roles.php');
 

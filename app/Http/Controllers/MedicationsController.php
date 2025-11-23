@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Medications;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -24,7 +25,8 @@ class MedicationsController extends Controller
 
         }
 
-        $medications = Medications::where('name', 'LIKE', "%$request->filter%")
+        $medications = Medications::where('user_id', Auth::id())
+                            ->where('name', 'LIKE', "%$request->filter%")
                             ->paginate($request->records_per_page);
         return view('medications/index', ['medications' => $medications, 'data' => $request]);
     }
@@ -59,6 +61,7 @@ class MedicationsController extends Controller
 
         try {
             $medication = new Medications();
+            $medication->user_id = Auth::id();
             $medication->name = $request->name;
             $medication->dosage = $request->dosage;
             $medication->frequency = $request->frequency;
@@ -82,10 +85,12 @@ class MedicationsController extends Controller
 
     public function edit($id) {
 
-        $medication = Medications::find($id);
+        $medication = Medications::where('id', $id)
+                                 ->where('user_id', Auth::id())
+                                 ->first();
 
         if (empty($medication)) {
-            Session::flash('message', ['content' => "El medicamento con id: '$id' no existe.", 'type' => 'error']);
+            Session::flash('message', ['content' => "El medicamento con id: '$id' no existe o no tienes permiso para editarlo.", 'type' => 'error']);
             return redirect()->back();
         }
 
@@ -119,7 +124,15 @@ class MedicationsController extends Controller
         ])->validate();
 
         try {
-            $medication = Medications::find($request->medication_id);
+            $medication = Medications::where('id', $request->medication_id)
+                                     ->where('user_id', Auth::id())
+                                     ->first();
+
+            if (empty($medication)) {
+                Session::flash('message', ['content' => 'No tienes permiso para editar este medicamento.', 'type' => 'error']);
+                return redirect()->back();
+            }
+
             $medication->name = $request->name;
             $medication->dosage = $request->dosage;
             $medication->frequency = $request->frequency;
@@ -144,10 +157,12 @@ class MedicationsController extends Controller
     public function delete($id) {
 
         try {
-            $medication = Medications::find($id);
+            $medication = Medications::where('id', $id)
+                                     ->where('user_id', Auth::id())
+                                     ->first();
 
             if (empty($medication)) {
-                Session::flash('message', ['content' => "El medicamento con id: '$id' no existe.", 'type' => 'error']);
+                Session::flash('message', ['content' => "El medicamento con id: '$id' no existe o no tienes permiso para eliminarlo.", 'type' => 'error']);
                 return redirect()->back();
             }
 
